@@ -4,6 +4,8 @@
 #include "store.h"
 #include "games.h"
 
+void welcome();
+
 	//private
 
 //save player data

@@ -56,22 +56,8 @@ int checkInput(std::string input);
 std::string getInput(gameConfig * config);
 std::string getInput();
 
-//debug function
-void varSizes();
-
-//function to print game info
-void printGameInfo();
-
-//function for printing statistics
-void viewStats();
-
-//main menu of game
-void menu();
-
-//welcome for first run
-void welcome();
-
 void addBreak();
 
 void addBreak(int amount);
+
 

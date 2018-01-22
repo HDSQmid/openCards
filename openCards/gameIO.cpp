@@ -6,6 +6,10 @@
 #include "store.h"
 #include "data.h"
 
+void menu();
+
+void viewStats();
+
 int checkInputInGame(std::string input, gameConfig * config) {
 
 	int ret = 0;
@@ -358,145 +362,7 @@ void cheats::bringMoreMoney(player * plyr, int playerNum) {
 
 }
 
-//main menu of game
-void menu() {
-	int validChoice;
-	char choice;
 
-	do {
-
-		//display menu
-		std::cout << "\nMain menu:" << std::endl;
-		std::cout << "Press 1 to start a game\n";
-		std::cout << "Press 2 to view statistics\n";
-		std::cout << "Press 3 to open the shop\n";
-		std::cout << "Press 4 to view game info\n";
-		std::cout << "Press 0 to exit\n";
-
-		std::string temp = getInput();
-		std::stringstream str(temp);
-		str >> choice;
-
-		do {
-
-
-
-			switch (choice) {
-
-			case '1':
-				startGame();
-				validChoice = 1;
-				break;
-
-			case '2':
-				viewStats();
-				validChoice = 1;
-				break;
-
-			case '3':
-				shop.enter();
-				validChoice = 1;
-				break;
-
-			case '4':
-				printGameInfo();
-				validChoice = 1;
-				break;
-
-			case '0':
-				data.save();
-				exit(0);
-				validChoice = 1;
-				break;
-
-			case 'd':
-				varSizes();
-				validChoice = 1;
-				break;
-
-			default:
-				std::cout << "invalid choice. Try again" << std::endl;
-				validChoice = 0;
-				std::cin >> choice;
-
-			}
-			//go to start if choice is invalid
-			if (!validChoice) continue;
-
-
-
-		} while (1 == 0);
-	} while (1 == 0);
-
-	return;
-}
-
-//welcome for first run
-void welcome() {
-
-	std::cout << "Welcome to openCards " << VERSION_NUM << std::endl;
-	
-	std::cout << "What do you want us to call you?" << std::endl;
-
-	std::string name;
-	std::getline(std::cin, name);
-	usr.setName(name);
-
-	addBreak(2);
-
-	std::cout << "Before you can play, you need to have some people to play against. Let's buy Mr Gupps! \nOh, and take 500 Cashies so that you can actually afford it!" << std::endl;
-	usr.addMoney(500);
-	addBreak();
-	while (!shop.ownsBuy("Mr Gupps")) {
-
-		std::cout << "Just buy it." << std::endl;
-
-	}
-
-	addBreak(2);
-
-	std::cout << "You can't play games without owning the games. Let's buy Blackjack!" << std::endl;
-	std::cout << "And because you ~~wasted~~ spent all your money on Mr Gupps, you can't afford it, so take another 500 Cashies" << std::endl;
-	usr.addMoney(500);
-	addBreak();
-	while (!shop.ownsBuy("Blackjack")) {
-
-		std::cout << "Just buy it." << std::endl;
-
-	}
-	addBreak(2);
-	std::cout << "You're all ready to go!!! \nWelcome, and have fun\n" << std::endl;
-	std::cout << "And take another 250 Cashies because I feel nice today" << std::endl;
-	usr.addMoney(250);
-
-	addBreak(2);
-
-	data.save();
-}
-
-//debug function
-void varSizes() {
-
-	std::cout << "Size of card: " << sizeof(card) << std::endl;
-	std::cout << "Size of deck: " << sizeof(deck) << std::endl;
-	std::cout << "Size of user: " << sizeof(user) << std::endl;
-	std::cout << "Size of player: " << sizeof(player) << std::endl;
-	std::cout << "Size of gameConfig: " << sizeof(gameConfig) << std::endl;
-	std::cout << "Size of dataIO: " << sizeof(dataIO) << std::endl;
-	std::cout << "Size of cheats: " << sizeof(cheats) << std::endl;
-
-	std::cout << "Rand() Max: " << RAND_MAX << std::endl;
-
-}
-
-//function to print game info
-void printGameInfo() {
-
-	std::cout << "Version " << VERSION_NUM << std::endl;
-	std::cout << "Built on " << VERSION_BUILD_DATE << std::endl;
-	std::cout << "Open Source Software" << std::endl;
-
-}
 
 void addBreak() {
 
@@ -521,18 +387,6 @@ void addBreak(int amount) {
 
 }
 
-//function for printing statistics
-void viewStats() {
-
-	std::cout << "\n ***STATISTICS*** \n\n" << std::endl;
-	std::cout << "Wins: " << usr.getWinCt() << std::endl;
-	std::cout << "Losses: " << usr.getLossCt() << std::endl;
-	std::cout << "Winning Streak: " << usr.getWinStrk() << std::endl;
-	std::cout << "Best Winning Streak: " << usr.getBestWinStrk() << std::endl;
-	std::cout << "Money in bank: " << usr.getBank() << std::endl;
-	std::cout << "\n";
-
-}
 
 
 cheats cheat;
