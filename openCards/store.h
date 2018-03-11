@@ -49,6 +49,8 @@ private:
 
 	void inventory();
 
+	void buytip();
+
 public:
 
 	//constructor

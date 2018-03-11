@@ -390,3 +390,82 @@ void addBreak(int amount) {
 
 
 cheats cheat;
+
+std::string tips::getTip()
+{
+	std::string tip;
+
+	int num = std::rand() % totalProbability;
+	int tipNum = 0;
+	while (true) {
+
+		num -= hint[tipNum].probability;
+		if (num <= 0) { 
+			tip = hint[tipNum].hint; 
+			break;
+		}
+		else {
+
+			tipNum++;
+			if (tipNum >= numTips) tipNum = 0;
+			continue;
+		}
+
+	}
+
+
+
+	return tip;
+}
+
+tips::tips() {
+	srand((unsigned int)time(NULL));
+	totalProbability = 0;
+	int rand = 0;
+	rand = std::rand() % 38 + 20;
+	totalProbability += rand;
+	hint[0].setup("This is a tip. It gives you ideas on things to try and information about gameplay. Some tips are rubbish, like this one (no pun intended), but others can give you useful cheats and help with playing.", rand);
+	rand = std::rand() % 4 + 37;
+	totalProbability += rand;
+	hint[1].setup("All cheaters get caught eventually.", rand);
+	rand = std::rand() % 69;
+	totalProbability += rand;
+	hint[2].setup("Mr Gupps is a bit stupid.", rand);
+	rand = std::rand() % 73 + 50;
+	totalProbability += rand;
+	hint[3].setup("You can contribute to the game on GitHub.", rand);
+	rand = std::rand() % 18;
+	totalProbability += rand;
+	hint[4].setup("If you type \"bringMoreMoney\" when you're playing a game, you can take more money into the game.", rand);
+	rand = std::rand() % 40 + 40;
+	totalProbability += rand;
+	hint[5].setup("Richard's last name is Cranium.", rand);
+	rand = std::rand() % 54 * 4;
+	totalProbability += rand;
+	hint[6].setup("Charlie is probably the most difficult player.", rand);
+	rand = std::rand() % 2 + 5;
+	totalProbability += rand;
+	hint[7].setup("This game took more effort than you think it did.",rand);
+	rand = std::rand() % 13;
+	totalProbability += rand;
+	hint[8].setup("Writing these tips was really boring.", rand);
+	rand = std::rand() % 2 + 3;
+	totalProbability += rand;
+	hint[9].setup("\"revealDeck\" tells you the value of every card in the deck", rand);
+	rand = std::rand() % 1 + 5;
+	totalProbability += rand;
+	hint[10].setup("\"breakTheBank <amount>\" adds money to the bank", rand);
+
+	numTips = 11;
+
+}
+
+void tip::setup(std::string value, int prob)
+{
+
+	hint = value;
+	probability = prob;
+
+}
+
+tips hint;

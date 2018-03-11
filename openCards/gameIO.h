@@ -12,7 +12,33 @@ class deck;
 class player;
 class gameConfig;
 
+class tip {
 
+public:
+
+	std::string hint;
+
+	int probability;
+
+	void setup(std::string value, int probability);
+
+};
+
+class tips {
+
+	int numTips;
+	int totalProbability;
+
+	tip hint[100];
+
+public:
+
+	std::string getTip();
+
+	tips();
+
+};
+extern tips hint;
 
 //class "cheats" provides structure to cheat
 class cheats {

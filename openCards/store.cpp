@@ -253,6 +253,36 @@ void store::inventory() {
 
 }
 
+void store::buytip()
+{
+
+	std::cout << "Are you sure you want to buy a tip for 25 Cashies? (y/n)" << std::endl;
+
+	char ch;
+	std::string str = getInput();
+	std::stringstream(str) >> ch;
+	if (ch == 'y') {
+
+		if (usr.getBank() >= 25) {
+
+			
+			usr.subtractMoney(25);
+			std::cout << "Success! New bank value: " << usr.getBank() << " Cashies" << std::endl;
+			std::cout << "Tip: " << hint.getTip() << std::endl;
+			data.save();
+			return;
+		}
+
+		else {
+
+			std::cout << "You don't have enough money to buy a tip. You only have " << usr.getBank() << " Cashies." << std::endl;
+			return;
+		}
+
+	}
+
+}
+
 //function to check if client owns a product
 int store::owns(std::string test) {
 
@@ -317,6 +347,7 @@ void store::enter() {
 		std::cout << "\n\n";
 		std::cout << "Press 1 to view game modes\n";
 		std::cout << "Press 2 to view personas\n";
+		std::cout << "Press t to buy a tip\n";
 		std::cout << "Press 0 to view all\n";
 		std::cout << "Press r to return to the main menu\n";
 		std::cout << "Press i to display your inventory\n";
@@ -336,6 +367,11 @@ void store::enter() {
 
 			case '2':
 				filter("player");
+				validChoice = 1;
+				break;
+
+			case 't':
+				buytip();
 				validChoice = 1;
 				break;
 

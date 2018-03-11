@@ -65,7 +65,7 @@ public:
 	gameConfig loadGameFromDisc();
 
 	//function for deleting game data
-	void rescue();
+	int rescue();
 
 	void log(std::string str);
 

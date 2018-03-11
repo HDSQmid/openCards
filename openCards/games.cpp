@@ -19,7 +19,7 @@ void unknown::play(gameConfig * setup) {
 
 	if (setup->numPlayers > 2) {
 
-		std::cout << "can't have more than 2 players in this game" << std::endl;
+		std::cout << "You can't have more than 2 players in this game. Continuing to next game...\n\n" << std::endl;
 		return;
 
 	}
@@ -32,7 +32,8 @@ void unknown::play(gameConfig * setup) {
 	}
 
 
-
+	std::cout << "\n";
+	std::cout << "Possible winnings are " << winnings << " cashies!\n" << std::endl;
 
 
 	//loops for dealing cards to players
@@ -59,7 +60,7 @@ void unknown::play(gameConfig * setup) {
 
 
 
-
+	std::cout << "\n\n";
 
 
 
@@ -143,6 +144,8 @@ void unknown::play(gameConfig * setup) {
 
 		}
 	}
+
+	std::cout << "\n\n";
 
 
 	if (score > 0) {

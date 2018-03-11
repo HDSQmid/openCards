@@ -467,7 +467,7 @@ gameConfig dataIO::loadGameFromDisc() {
 }
 
 //function for deleting game data
-void dataIO::rescue() {
+int dataIO::rescue() {
 
 
 	//rescue mode
@@ -478,11 +478,11 @@ void dataIO::rescue() {
 	if (getInput() == "yes") {
 
 		deleteFiles();
+		user tempUsr;
+		usr = tempUsr;
 		std::cout << "You have been successfully rescued!!!" << std::endl;
-		std::cout << "In order to complete the rescue, you must restar the application." << std::endl;
-		std::cout << "Press any key to exit." << std::endl;
-		std::getchar();
-		exit(0);
+		
+		return 1;
 
 	}
 
@@ -491,7 +491,7 @@ void dataIO::rescue() {
 		std::cout << "We'll just let you drown!" << std::endl;
 		std::cout << "Loading data normally..." << std::endl;
 
-
+		return 0;
 
 	}
 
