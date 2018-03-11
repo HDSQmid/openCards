@@ -480,6 +480,8 @@ int dataIO::rescue() {
 		deleteFiles();
 		user tempUsr;
 		usr = tempUsr;
+		store tempStore;
+		shop = tempStore;
 		std::cout << "You have been successfully rescued!!!" << std::endl;
 		
 		return 1;

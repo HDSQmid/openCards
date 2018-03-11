@@ -6,6 +6,8 @@
 #include "store.h"
 #include "data.h"
 
+void welcome();
+
 void menu();
 
 void viewStats();
@@ -157,6 +159,15 @@ int checkInput(std::string input) {
 
 		data.save();
 
+		ret = 1;
+
+	}
+
+	if (input == "rescue") {
+
+		data.rescue();
+		welcome();
+		menu();
 		ret = 1;
 
 	}
