@@ -48,17 +48,23 @@ public:
 //class gameConfig configurates game
 class gameConfig {
 public:
+	int gameNumber;
 	int numGames;
 	int * gameType;
 	int numPlayers;
 	int initialNumPlayers;
 	int * playerID;
+	int numEliminations;
 
 	deck dck;
 
 	player ** players;
 
+	player ** eliminatedPlayers;
+
 	game ** gamesPtr;
+
+	void eliminatePlayer(int playerNum);
 
 };
 

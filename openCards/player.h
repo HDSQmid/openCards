@@ -19,7 +19,8 @@ class player {
 protected:
 
 	int isUser = 0;
-
+	
+	int playerNum;
 	int numCards;
 	card * cards;
 	long long int bank;
@@ -33,6 +34,8 @@ protected:
 public:
 	//default constructor
 	player();
+
+	player(int playerNumber);
 
 	//remove player from game
 	void eliminate(int place);
@@ -65,33 +68,34 @@ public:
 	//getters for cards
 	//
 
-
+	//returns player number
+	int getPlayerNum() const;
 
 	//for returning name of card to application
-	std::string getCardName(int num);
+	std::string getCardName(int num) const;
 
 	//for returning rank of card to application
-	int getCardRank(int num);
+	int getCardRank(int num) const;
 
 	//for returning suit of card to application
-	int getCardSuit(int num);
+	int getCardSuit(int num)const;
 
 	//for returning value of card to application
-	int getCardValue(int num);
+	int getCardValue(int num) const;
 
 	//function to return type of player as integer
-	int getPlayerID();
+	int getPlayerID() const;
 
-	std::string getName();
+	std::string getName() const;
 
 	//function to return type of player as string
-	std::string getPlayerTypeS();
+	std::string getPlayerTypeS() const;
 
 	//returns score of player
-	int getScore();
+	int getScore() const;
 
 	//returns amount in bank of plaer
-	long long int getMoney();
+	long long int getMoney() const;
 
 	//
 	//adders
@@ -110,10 +114,10 @@ public:
 	//
 
 	//prints cards of player if player is user
-	virtual void printCards();
+	virtual void printCards() const;
 
 	//revelas hand of player
-	void revealHand();
+	void revealHand() const;
 
 	//chooses the order of cards for the game unknwon
 	virtual void unknown_chooseOrder(gameConfig game);
@@ -145,7 +149,25 @@ public:
 	//chooses value for jokers: 1 to 11
 	virtual int blackjack_jokerChooseVal(int sum, gameConfig game);
 
+	//operators for comparison
+	friend bool operator==(const player& lhs, const player& rhs);
+	friend bool operator!=(const player& lhs, const player& rhs);
+	friend bool operator<(const player& lhs, const player& rhs);
+	friend bool operator>(const player& lhs, const player& rhs);
+	friend bool operator<=(const player& lhs, const player& rhs);
+	friend bool operator>=(const player& lhs, const player& rhs);
+
 };
+
+//operators for comparison
+inline bool operator==(const player& lhs, const player& rhs);
+inline bool operator!=(const player& lhs, const player& rhs);
+inline bool operator<(const player& lhs, const player& rhs);
+inline bool operator>(const player& lhs, const player& rhs);
+inline bool operator<=(const player& lhs, const player& rhs);
+inline bool operator>=(const player& lhs, const player& rhs);
+
+
 
 //player for client
 class playerUser : public player {
@@ -154,12 +176,14 @@ public:
 	//default constructor
 	playerUser();
 
+	playerUser(int playerNumber);
+
 	//
 	//functions for game unknown
 	//
 
 	//function to print the cards that the user has drawn
-	void printCards();
+	void printCards() const;
 
 	//function choose order gets order in which cards are placed
 	void unknown_chooseOrder(gameConfig game);
@@ -192,8 +216,10 @@ public:
 	//default constructor
 	playerGupps();
 
+	playerGupps(int playerNumber);
+
 	//function to print cards in hand does nothing for bot
-	void printCards();
+	void printCards() const;
 
 	//function to bet money in game
 	int bet(int numBets, int currentWinnings, gameConfig game);
@@ -214,8 +240,10 @@ public:
 	//default constructor
 	playerLarry();
 
+	playerLarry(int playerNumber);
+
 	//function to print cards in hand does nothing for bot
-	void printCards();
+	void printCards() const;
 
 	//function to bet money in game
 	int bet(int numBets, int currentWinnings, gameConfig game);
@@ -236,8 +264,10 @@ public:
 	//default constructor
 	playerRichard();
 
+	playerRichard(int playerNumber);
+
 	//function to print cards in hand does nothing for bot
-	void printCards();
+	void printCards() const;
 
 	//function to bet money in game
 	int bet(int numBets, int currentWinnings, gameConfig game);
@@ -262,8 +292,11 @@ public:
 	//default constructor
 	playerCharlie();
 
+	playerCharlie(int playerNumber);
+
+
 	//function to print cards in hand does nothing for bot
-	void printCards();
+	void printCards() const;
 
 	//function to bet money in game
 	int bet(int numBets, int currentWinnings, gameConfig game);

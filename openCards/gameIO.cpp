@@ -105,6 +105,13 @@ int checkInput(std::string input) {
 		ret = 1;
 	}
 
+	if (input == "crash") {
+
+		throw std::exception("Game was force quit");
+
+		ret = 1;
+	}
+
 	//open menu
 	if (input == "menu") {
 
@@ -237,6 +244,8 @@ std::string getInput(gameConfig * config) {
 		std::cin.clear();
 		std::cin >> input;
 
+		std::cin.clear();
+
 		int cont1 = checkInput(input);
 		int cont2 = checkInputInGame(input, config);
 
@@ -260,6 +269,8 @@ std::string getInput() {
 		std::cout << usr.getName() << ">> ";
 		std::cin.clear();
 		std::cin >> input;
+		
+		std::cin.clear();
 
 		int cont1 = checkInput(input);
 		if (cont1) continue;

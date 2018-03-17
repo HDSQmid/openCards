@@ -152,6 +152,7 @@
     <ClInclude Include="gameIO.h" />
     <ClInclude Include="games.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="store.h" />
     <ClInclude Include="targetver.h" />
@@ -172,6 +173,11 @@
     </ClCompile>
     <ClCompile Include="store.cpp" />
     <ClCompile Include="User.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="playerInfo.gdf" />
+    <None Include="stats.gdf" />
+    <None Include="store.gdf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

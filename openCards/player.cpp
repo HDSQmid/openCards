@@ -17,9 +17,18 @@
 
 	}
 
+	player::player(int playerNumber)
+	{
+		playerNum = playerNumber;
+		ID = -1;
+		numCards = 0;
+		inHand = 0;
+		name = "null";
+	}
+
 	//remove player from game
 	void player::eliminate(int place) {
-		std::cout << name << " was eliminated from the game because they ran out of money, giving them a placing of " << place << std::endl;
+		std::cout << name << " was eliminated from the game, giving them a placing of " << place << std::endl;
 		eliminated = 1;
 
 	}
@@ -33,10 +42,22 @@
 	//for dealing cards to player
 	void player::recieveCard(card newCrd) {
 
-		cards[inHand] = newCrd;
+		card * temp = new card[inHand + 1];
+
+		for (int i = 0; i < inHand; i++) {
+
+			temp[i] = cards[i];
+
+		}
+
+
+
+		temp[inHand] = newCrd;
 		inHand++;
 
 		if (inHand > numCards) numCards = inHand;
+
+		cards = temp;
 
 		return;
 	}
@@ -91,49 +112,54 @@
 	//getters for cards
 	//
 
+	int player::getPlayerNum() const
+	{
+		return playerNum;
+	}
+
 	//for returning name of card to application
-	std::string player::getCardName(int num) {
+	std::string player::getCardName(int num) const {
 
 		return cards[num].getName();
 
 	}
 
 	//for returning rank of card to application
-	int player::getCardRank(int num) {
+	int player::getCardRank(int num) const {
 
 		return cards[num].getRank();
 
 	}
 
 	//for returning suit of card to application
-	int player::getCardSuit(int num) {
+	int player::getCardSuit(int num) const {
 
 		return cards[num].getSuit();
 
 	}
 
 	//for returning value of card to application
-	int player::getCardValue(int num) {
+	int player::getCardValue(int num) const {
 
 		return cards[num].getValue();
 
 	}
 
 	//function to return type of player as integer
-	int player::getPlayerID() {
+	int player::getPlayerID() const {
 
 		return ID;
 
 	}
 
-	std::string player::getName() {
+	std::string player::getName() const {
 
 		return name;
 
 	}
 
 	//function to return type of player as string
-	std::string player::getPlayerTypeS() {
+	std::string player::getPlayerTypeS() const {
 
 		std::string typeS;
 
@@ -146,14 +172,14 @@
 	}
 
 	//returns score of player
-	int player::getScore() {
+	int player::getScore() const {
 
 		return score;
 
 	}
 
 	//returns amount in bank of plaer
-	long long int player::getMoney() {
+	long long int player::getMoney() const {
 
 		return bank;
 
@@ -198,7 +224,7 @@
 	}
 	
 	//revelas hand of player
-	void player::revealHand() {
+	void player::revealHand() const {
 
 		//loop for printing card values
 		for (int ctr = 0; ctr < inHand; ctr++) {
@@ -211,7 +237,7 @@
 
 	}
 
-	void player::printCards() {
+	void player::printCards() const{
 
 		return;
 
@@ -383,12 +409,22 @@
 
 	}
 
+	playerUser::playerUser(int playerNumber)
+	{
+		playerNum = playerNumber;
+		ID = -1;
+		numCards = 0;
+		inHand = 0;
+		name = usr.getName();
+
+	}
+
 	//
 	//functions for game unknown
 	//
 
 	//function to print the cards that the user has drawn
-	void playerUser::printCards() {
+	void playerUser::printCards() const {
 
 		//loop for printing card values
 		std::cout << "Your cards are:\n";
@@ -463,6 +499,13 @@
 	}
 
 	int playerUser::bet(int numBets, int currentWinnings, gameConfig game) {
+
+		if (bank <= 0) {
+
+			std::cout << "You have run out of money." << std::endl;
+			return 0;
+		}
+
 		int amount;
 		std::string in;
 		std::cout << "How much would you like to bet?" << std::endl;
@@ -571,6 +614,8 @@
 
 	void playerUser::addBonusMoney(int amount) {
 
+		std::cout << "You were awarded " << amount << " cashies!" << std::endl;
+
 		usr.addMoney(amount);
 		return;
 
@@ -654,8 +699,18 @@
 
 	}
 
+	playerGupps::playerGupps(int playerNumber)
+	{
+		playerNum = playerNumber;
+		ID = -1;
+		numCards = 0;
+		inHand = 0;
+		name = "Mr Gupps";
+
+	}
+
 	//function to print cards in hand does nothing for bot
-	void playerGupps::printCards() {
+	void playerGupps::printCards() const {
 
 		return;
 	}
@@ -778,8 +833,18 @@
 
 	}
 
+	playerLarry::playerLarry(int playerNumber)
+	{
+		playerNum = playerNumber;
+		ID = -1;
+		numCards = 0;
+		inHand = 0;
+		name = "Larry";
+
+	}
+
 	//function to print cards in hand does nothing for bot
-	void playerLarry::printCards() {
+	void playerLarry::printCards() const {
 
 		return;
 	}
@@ -902,8 +967,18 @@
 
 	}
 
+	playerRichard::playerRichard(int playerNumber)
+	{
+		playerNum = playerNumber;
+		ID = -1;
+		numCards = 0;
+		inHand = 0;
+		name = "Richard";
+
+	}
+
 	//function to print cards in hand does nothing for bot
-	void playerRichard::printCards() {
+	void playerRichard::printCards() const {
 
 		return;
 	}
@@ -1024,8 +1099,18 @@
 
 	}
 
+	playerCharlie::playerCharlie(int playerNumber)
+	{
+		playerNum = playerNumber;
+		ID = -1;
+		numCards = 0;
+		inHand = 0;
+		name = "Charlie";
+
+	}
+
 	//function to print cards in hand does nothing for bot
-	void playerCharlie::printCards() {
+	void playerCharlie::printCards() const {
 
 		return;
 	}
@@ -1282,4 +1367,44 @@
 
 	}
 
+	inline bool operator==(const player & lhs, const player & rhs)
+	{
 
+		if (lhs.getMoney() == rhs.getMoney()) return true;
+
+		return false;
+	}
+
+	inline bool operator!=(const player & lhs, const player & rhs)
+	{
+		return !operator==(lhs, rhs);
+		
+	}
+
+	inline bool operator<(const player & lhs, const player & rhs)
+	{
+
+		if (lhs.getMoney() < rhs.getMoney()) return true;
+
+		return false;
+	}
+
+	inline bool operator>(const player & lhs, const player & rhs)
+	{
+		return !operator<(lhs, rhs);
+	}
+
+	inline bool operator<=(const player & lhs, const player & rhs)
+	{
+
+		if (operator<(lhs, rhs) || operator==(lhs, rhs)) return true;
+
+		return false;
+	}
+
+	inline bool operator>=(const player & lhs, const player & rhs)
+	{
+		if (operator>(lhs, rhs) || operator==(lhs, rhs)) return true;
+
+		return false;
+	}

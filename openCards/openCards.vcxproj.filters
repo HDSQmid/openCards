@@ -42,6 +42,9 @@
     <ClInclude Include="gameIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -71,5 +74,16 @@
     <ClCompile Include="gameIO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="playerInfo.gdf">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="stats.gdf">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="store.gdf">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

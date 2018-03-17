@@ -27,7 +27,19 @@ void unknown::play(gameConfig * setup) {
 
 	for (int ctr = 0; ctr < setup->numPlayers; ctr++) {
 
-		winnings += setup->players[ctr]->bet(ctr, winnings, *setup);
+		int tempMoney = setup->players[ctr]->bet(ctr, winnings, *setup);
+		if (tempMoney == 0) {
+
+			std::cout << "Eliminating " << setup->players[ctr]->getName() << " from the game..." << std::endl;
+			setup->eliminatePlayer(ctr);
+
+		}
+
+		else {
+
+			winnings += tempMoney;
+
+		}
 
 	}
 
@@ -177,7 +189,19 @@ void blackjack::play(gameConfig * setup) {
 	//get bets
 	for (int ctr = 0; ctr < setup->numPlayers; ctr++) {
 
-		winnings += setup->players[ctr]->bet(ctr, winnings, *setup);
+		int tempMoney = setup->players[ctr]->bet(ctr, winnings, *setup);
+		if (tempMoney == 0) {
+
+			std::cout << "Eliminating " << setup->players[ctr]->getName() << " from the game..." << std::endl;
+			setup->eliminatePlayer(ctr);
+
+		}
+
+		else {
+
+			winnings += tempMoney;
+
+		}
 
 	}
 
@@ -220,7 +244,19 @@ void blackjack::play(gameConfig * setup) {
 		//get more bets
 
 
-		winnings += setup->players[ctr]->bet(ctr, winnings, *setup);
+		int tempMoney = setup->players[ctr]->bet(ctr, winnings, *setup);
+		if (tempMoney == 0) {
+
+			std::cout << "Eliminating " << setup->players[ctr]->getName() << " from the game..." << std::endl;
+			setup->eliminatePlayer(ctr);
+
+		}
+
+		else {
+
+			winnings += tempMoney;
+
+		}
 
 
 
@@ -306,6 +342,7 @@ void blackjack::play(gameConfig * setup) {
 }
 
 
+
 //function for playing the games
 void playGame(gameConfig * setup) {
 
@@ -316,81 +353,122 @@ void playGame(gameConfig * setup) {
 	}
 
 	//launch the games
-	for (int ctr = 0; ctr < setup->numGames; ctr++) {
+	setup->numEliminations = 0;
+	for (setup->gameNumber = 0; setup->gameNumber < setup->numGames; setup->gameNumber++) {
 
-		std::cout << "starting game " << ctr + 1 << ": ";
-		setup->gamesPtr[ctr]->play(setup);
-
-		//eliminate players
-		int numEliminations = 0;
 		for (int inner = 0; inner < setup->numPlayers; inner++) {
 
 			setup->players[inner]->clearHand();
 			if (setup->players[inner]->getMoney() <= 0) {
 
-				setup->players[inner]->eliminate(setup->numPlayers);
-				numEliminations++;
+				setup->eliminatePlayer(inner);
 
 			}
 
 		}
 
-		setup->numPlayers -= numEliminations;
 		if (setup->numPlayers == 1) {
 			std::cout << "Only one player left in game. Exiting to main menu" << std::endl;
 			break;
 
 		}
 
+		std::cout << "starting game " << setup->gameNumber + 1 << ": ";
+		setup->gamesPtr[setup->gameNumber]->play(setup);
+
+		//eliminate players
+		
+		
+
+		
+		
 
 
-	}
-
-	//check for winners
-	int placing1 = -1;
-	int placing2 = -1;
-	int placing3 = -1;
-	int highhestWinCt = -1;
-	for (int ctr = 0; ctr < setup->initialNumPlayers; ctr++) {
-		std::cout << setup->players[ctr]->getName() << " (Player " << ctr + 1 << ") won " << setup->players[ctr]->getScore() << " times" << std::endl;
-		setup->players[ctr]->returnMoney();
-		if (setup->players[ctr]->getScore() > highhestWinCt) {
-
-			placing3 = placing2;
-			placing2 = placing1;
-			placing1 = ctr;
-			highhestWinCt = setup->players[ctr]->getScore();
-
-		}
 
 	}
+
+	
 
 	//give bonus money to players remaining
 	for (int ctr = 0; ctr < setup->numPlayers; ctr++) {
+		
+		setup->players[ctr]->addBonusMoney(100 * setup->initialNumPlayers / setup->numPlayers);
 
-		if (!setup->players[ctr]->isEliminated()) {
+	}
 
-			setup->players[ctr]->addBonusMoney(100 * setup->initialNumPlayers / setup->numPlayers);
+	//sort remaining players into order by money they have remaining (least money to most money)
+	int didSwap;
+	for (int outer = 0; outer < setup->numPlayers; outer++) {
+
+		didSwap = 0;
+		for (int inner = outer; inner < setup->numPlayers; inner++) {
+
+			if(setup->players[inner] > setup->players[outer]){
+
+				player * temp = setup->players[inner];
+				setup->players[inner] = setup->players[outer];
+				setup->players[outer] = temp;
+				didSwap = 1;
+
+			}
+
+			if (!didSwap) break;
 
 		}
 
 	}
 
+	//print placings, first from players remaining, then from eliminations
 
-	if (placing1 != -1) {
-		setup->players[placing1]->addBonusMoney(100);
-		std::cout << "1st Place: " << setup->players[placing1]->getName() << " (Player " << placing1 + 1 << ")" << std::endl;
+	int place = 0;
+
+	addBreak(3);
+	std::cout << "Placings:\n" << std::endl;
+	//remaining
+	for (int i = setup->numPlayers - 1; i > 0; i--) {
+		place++;
+		std::cout << place << ": " << setup->players[i]->getName() << "(Player " << setup->players[i]->getPlayerNum() << ")" << std::endl;
+
+
 	}
-	if (placing2 != -1 && setup->numPlayers > 2) {
-		setup->players[placing2]->addBonusMoney(50);
-		std::cout << "2nd Place: " << setup->players[placing2]->getName() << " (Player " << placing2 + 1 << ")" << std::endl;
-	}
-	if (placing3 != -1 && setup->numPlayers > 3) {
-		setup->players[placing3]->addBonusMoney(50);
-		std::cout << "3rd Place: " << setup->players[placing3]->getName() << " (Player " << placing3 + 1 << ")" << std::endl;
+	//eliminated
+	if (setup->numEliminations) {
+		for (int i = setup->numEliminations - 1; i > 0; i--) {
+			place++;
+			std::cout << place << ": " << setup->eliminatedPlayers[i]->getName() << "(Player " << setup->players[i]->getPlayerNum() << ")" << std::endl;
+
+
+		}
 	}
 
 	return;
+}
+
+//function to eliminate player from the game
+void gameConfig::eliminatePlayer(int playerNum) {
+
+	players[playerNum]->eliminate(numPlayers);
+	numEliminations++;
+	numPlayers--;
+
+	player ** temp = new player *[numEliminations];
+	if (numEliminations > 1) {
+		for (int i = 0; i < numEliminations - 1; i++) {
+
+			temp[i] = eliminatedPlayers[i];
+
+		}
+	}
+	temp[numEliminations - 1] = players[playerNum];
+
+	for (int i = playerNum; i < numPlayers; i++) {
+
+		players[i] = players[i + 1];
+
+	}
+
+	eliminatedPlayers = temp;
+
 }
 
 //function setUpGame sets up and starts game
@@ -563,25 +641,25 @@ gameConfig setupGame() {
 		switch (tempPlayerIDs[ctr]) {
 
 		case 0:
-			players[ctr] = new playerUser;
+			players[ctr] = new playerUser(ctr);
 			break;
 
 
 
 		case 2:
-			players[ctr] = new playerGupps;
+			players[ctr] = new playerGupps(ctr);
 			break;
 
 		case 3:
-			players[ctr] = new playerLarry;
+			players[ctr] = new playerLarry(ctr);
 			break;
 
 		case 4:
-			players[ctr] = new playerRichard;
+			players[ctr] = new playerRichard(ctr);
 			break;
 
 		case 10:
-			players[ctr] = new playerCharlie;
+			players[ctr] = new playerCharlie(ctr);
 
 		default:
 			std::cout << "Bad Value." << std::endl;
