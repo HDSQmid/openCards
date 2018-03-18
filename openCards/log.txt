@@ -1,2 +1,10 @@
-Sun Mar 18 16:50:44 2018
+Sun Mar 18 17:06:16 2018
 	Application launched
+Sun Mar 18 17:06:16 2018
+	Data loaded
+Sun Mar 18 17:06:22 2018
+	Game progress saved
+Sun Mar 18 17:06:27 2018
+	Game progress saved
+Sun Mar 18 17:06:27 2018
+	Application closed

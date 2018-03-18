@@ -155,6 +155,7 @@ int checkInput(std::string input) {
 	if (input == "quit" || input == "exit") {
 
 		data.save();
+		data.log("Application closed");
 		exit(0);
 
 	}
@@ -258,8 +259,7 @@ std::string getInput(gameConfig * config) {
 
 		if (cont1 || cont2) continue;
 
-		//back up data before returning
-		data.quickSave();
+		\
 
 		return input;
 
@@ -282,9 +282,7 @@ std::string getInput() {
 		int cont1 = checkInput(input);
 		if (cont1) continue;
 
-		//back up data before returning
-		data.quickSave();
-
+		\
 		return input;
 
 	}

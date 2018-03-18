@@ -245,7 +245,7 @@ void dataIO::quickSave() {
 
 	savePlayerStats();
 
-
+	log("Game progress quick saved");
 
 }
 
@@ -256,6 +256,7 @@ void dataIO::save() {
 	saveStoreData();
 	savePlayerInfo();
 
+	log("Game progress saved");
 
 	return;
 
@@ -269,12 +270,13 @@ void dataIO::load() {
 		loadPlayerStats();
 		loadStoreData();
 		loadPlayerInfo();
-
+		log("Data loaded");
 	}
 
 	else {
 
 		welcome();
+		log("First run");
 
 	}
 
@@ -499,7 +501,7 @@ int dataIO::rescue() {
 		store tempStore;
 		shop = tempStore;
 		std::cout << "You have been successfully rescued!!!" << std::endl;
-		
+		log("Game data reset");
 		return 1;
 
 	}
@@ -516,13 +518,17 @@ int dataIO::rescue() {
 
 void dataIO::log(std::string str) {
 
-	output.open(LOG_FILE, std::iostream::app);
-	if (output.is_open()) {
+	logStream.open(LOG_FILE, std::iostream::app);
+	if (logStream.is_open()) {
 
-		output << currentDateTime() << "\t" << str << std::endl;
+		logStream << currentDateTime() << "\t" << str << std::endl;
+
+		logStream.close();
 
 	}
-	output.close();
+
+	else throw std::exception("Error adding log");
+	
 	return;
 }
 

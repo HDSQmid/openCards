@@ -25,6 +25,7 @@ class dataIO {
 private:
 	std::ofstream output;
 	std::ifstream input;
+	std::ofstream logStream;
 
 	
 
