@@ -1,10 +1,12 @@
-Sun Mar 18 17:06:16 2018
+Sun Mar 18 17:11:37 2018
 	Application launched
-Sun Mar 18 17:06:16 2018
+Sun Mar 18 17:11:37 2018
 	Data loaded
-Sun Mar 18 17:06:22 2018
+Sun Mar 18 17:11:52 2018
+	MiggyG >>  is this thing working!!!????
+Sun Mar 18 17:11:56 2018
 	Game progress saved
-Sun Mar 18 17:06:27 2018
+Sun Mar 18 17:11:57 2018
 	Game progress saved
-Sun Mar 18 17:06:27 2018
+Sun Mar 18 17:11:57 2018
 	Application closed

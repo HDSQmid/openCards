@@ -119,6 +119,14 @@ int checkInput(std::string input) {
 		ret = 1;
 	}
 
+	if (input == "log") {
+		std::string str;
+		std::getline(std::cin, str);
+		data.log(usr.getName() + " >> " + str);
+
+		ret = 1;
+	}
+
 	//open menu
 	if (input == "menu") {
 
@@ -259,7 +267,7 @@ std::string getInput(gameConfig * config) {
 
 		if (cont1 || cont2) continue;
 
-		\
+		
 
 		return input;
 
@@ -282,7 +290,7 @@ std::string getInput() {
 		int cont1 = checkInput(input);
 		if (cont1) continue;
 
-		\
+		
 		return input;
 
 	}
