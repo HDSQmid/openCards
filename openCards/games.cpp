@@ -495,7 +495,7 @@ gameConfig setupGame() {
 
 	//get game modes
 	for (int ctr = 0; ctr < setup.numGames; ctr++) {
-
+		std::cout << "\n";
 		std::cout << "What is the game mode for game " << ctr + 1 << "?" << std::endl;
 		std::cout << "1: Black Jack" << std::endl;
 		std::cout << "2: Unknown" << std::endl;
@@ -583,7 +583,7 @@ gameConfig setupGame() {
 
 	//loop to get player ID
 	for (int ctr = 0; ctr < setup.numPlayers; ctr++) {
-
+		std::cout << "\n";
 		std::cout << "who will be player " << ctr + 1 << "?\n";
 		std::cout << "0: You (The user)\n";
 		std::cout << "2: Mr Gupps\n";

@@ -10,6 +10,14 @@ void welcome();
 
 //save player data
 
+const std::string currentDateTime() {
+	std::chrono::system_clock::time_point p = std::chrono::system_clock::now();
+	time_t t = std::chrono::system_clock::to_time_t(p);
+	char str[26];
+	ctime_s(str, sizeof str, &t);
+	return str;
+}
+
 //stats
 void dataIO::savePlayerStats() {
 
@@ -491,8 +499,7 @@ int dataIO::rescue() {
 	else {
 
 		std::cout << "We'll just let you drown!" << std::endl;
-		std::cout << "Loading data normally..." << std::endl;
-
+		
 		return 0;
 
 	}
@@ -501,6 +508,12 @@ int dataIO::rescue() {
 
 void dataIO::log(std::string str) {
 
+	output.open(LOG_FILE, std::iostream::app);
+	if (output.is_open()) {
+
+		output << currentDateTime() << "\t" << str << std::endl;
+
+	}
 
 	return;
 }

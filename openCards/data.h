@@ -18,6 +18,7 @@
 
 class gameConfig;
 
+const std::string currentDateTime();
 
 class dataIO {
 
