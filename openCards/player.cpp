@@ -515,7 +515,7 @@
 		int amount;
 		std::string in;
 		
-		
+		std::cout << "How much do you want to bet? You have" << bank << std::endl;
 
 		do {
 
