@@ -70,6 +70,8 @@ public:
 
 	void log(std::string str);
 
+	void clearLog();
+
 };
 extern dataIO data;
 

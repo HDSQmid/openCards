@@ -112,6 +112,13 @@ int checkInput(std::string input) {
 		ret = 1;
 	}
 
+	if (input == "clear log") {
+
+		data.clearLog();
+
+		ret = 1;
+	}
+
 	//open menu
 	if (input == "menu") {
 

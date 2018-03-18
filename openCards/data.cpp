@@ -202,6 +202,14 @@ void dataIO::deleteFiles() {
 
 
 	}
+	try {
+		remove(LOG_FILE);
+	}
+	catch (...) {
+
+
+
+	}
 
 	return;
 
@@ -514,8 +522,24 @@ void dataIO::log(std::string str) {
 		output << currentDateTime() << "\t" << str << std::endl;
 
 	}
+	output.close();
+	return;
+}
+
+void dataIO::clearLog()
+{
+	try {
+		remove(LOG_FILE);
+	}
+	catch(...){
+
+
+
+	}
 
 	return;
+
+
 }
 
 dataIO data;
