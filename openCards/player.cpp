@@ -419,6 +419,12 @@
 
 	}
 
+	playerUser::~playerUser()
+	{
+		returnMoney();
+
+	}
+
 	//
 	//functions for game unknown
 	//
@@ -508,74 +514,27 @@
 
 		int amount;
 		std::string in;
-		std::cout << "How much would you like to bet?" << std::endl;
-		std::cout << "You have " << bank << " available in game" << std::endl;
+		
+		
 
-		if (numBets) {
+		do {
 
-			if (currentWinnings / numBets <= bank) {
+			in = getInput(&game);
+			std::stringstream str(in);
+			str >> amount;
+			if (amount < 1 || amount > bank) {
 
-				std::cout << "you must bet at least " << currentWinnings / numBets << std::endl;
+				std::cout << "bad value" << std::endl;
+				str.clear();
 
-
-				do {
-
-					in = getInput(&game);
-					std::stringstream str(in);
-					str >> amount;
-					if (amount < currentWinnings / numBets || amount > bank) {
-
-						std::cout << "bad value" << std::endl;
-						str.clear();
-
-
-					}
-					else break;
-				} while (1 == 1);
-			}
-			else {
-
-				std::cout << "You must bet " << bank << std::endl;
-				do {
-
-					in = getInput(&game);
-					std::stringstream str(in);
-					str >> amount;
-					if (amount != bank) {
-
-						std::cout << "bad value" << std::endl;
-						str.clear();
-
-
-					}
-					else break;
-				} while (1 == 1);
 
 			}
 
+			else break;
 
-		}
+		} while (1 == 1);
 
-		else {
-
-			do {
-
-				in = getInput(&game);
-				std::stringstream str(in);
-				str >> amount;
-				if (amount < 1 || amount > bank) {
-
-					std::cout << "bad value" << std::endl;
-					str.clear();
-
-
-				}
-
-				else break;
-
-			} while (1 == 1);
-
-		}
+		
 
 
 
@@ -717,49 +676,13 @@
 
 	//function to bet money in game
 	int playerGupps::bet(int numBets, int currentWinnings, gameConfig game) {
+		
+
 		int amount;
 
+		if (bank > 100) amount = 100;
 
-		//if first bet has already been made
-		if (numBets) {
-
-			//if player has more money than average bet amount
-			if (currentWinnings / numBets <= bank / 2 + 1) {
-
-				//if 
-				if (bank / 2 + 1 < 500 || bank < 500) {
-
-					amount = (int)bank / 2 + 1;
-
-				}
-
-				else amount = 500;
-
-			}
-			//if player has less money than average bet amount they must bet all their money
-			else {
-
-
-				amount = (int)bank;
-
-			}
-
-
-		}
-		//if player is making first bet
-		else {
-
-			if (bank / 2 < 500 || bank < 500) {
-
-				amount = (int)bank / 2;
-
-			}
-
-			else amount = 500;
-
-		}
-
-
+		else amount = bank;
 
 		bank -= amount;
 		return amount;
@@ -854,47 +777,9 @@
 		int amount;
 
 
-		//if there have already been bets
-		if (numBets) {
+		if (bank > 500) amount = 250;
 
-			//if player has more money in bank than average bet amount
-			if (currentWinnings / numBets <= bank / 3 + 1) {
-
-
-				if (bank / 3 + 1 < 750 || bank < 750) {
-
-					amount = (int)bank / 3 + 1;
-
-				}
-
-				else amount = 750;
-
-
-			}
-			//if player has less money than average bet amount they must bet all their money
-			else {
-
-
-				amount = (int)bank;
-
-			}
-
-
-		}
-		//if player is making the first bet
-		else {
-
-			if (bank / 3 < 750 || bank < 750) {
-
-				amount = (int)bank / 3;
-
-			}
-
-			else amount = 750;
-
-		}
-
-
+		else amount = 0.5 * bank;
 
 		bank -= amount;
 		return amount;
@@ -987,49 +872,10 @@
 	int playerRichard::bet(int numBets, int currentWinnings, gameConfig game) {
 		int amount;
 
+		if (bank > 1500) amount = 500;
 
-		//if there have been bets
-		if (numBets) {
-
-			//if player has more money than the average bet amount
-			if (currentWinnings / numBets <= bank / 5 - 1) {
-
-
-				if (bank / 5 - 1 < 1500 || bank < 1500) {
-
-					amount = (int)bank / 5 - 1;
-
-				}
-
-				else amount = 1500;
-
-
-			}
-			//if player has less money than average bet amount, they must bet all their money
-			else {
-
-
-				amount = (int)bank;
-
-			}
-
-
-		}
-		//if player makes the first bet
-		else {
-
-			if (bank / 5 < 1500 || bank < 1500) {
-
-				amount = (int)bank / 5;
-
-			}
-
-			else amount = 1500;
-
-		}
-
-
-
+		else amount = (int)(1 / 3 * (float)bank);
+		
 		bank -= amount;
 		return amount;
 
@@ -1120,48 +966,14 @@
 		int amount;
 
 
-		//if there have been bets
-		if (numBets) {
+		amount = 250;
 
-			//if player has more money than the average bet amount
-			if (currentWinnings / numBets <= bank / 5 - 1) {
+			
 
-
-				if (bank / 5 - 1 < 1500 || bank < 1500) {
-
-					amount = (int)bank / 5 - 1;
-
-				}
-
-				else amount = 1500;
+		
 
 
-			}
-			//if player has less money than average bet amount, they must bet all their money
-			else {
-
-
-				amount = (int)bank;
-
-			}
-
-
-		}
-		//if player makes the first bet
-		else {
-
-			if (bank / 5 < 1500 || bank < 1500) {
-
-				amount = (int)bank / 5;
-
-			}
-
-			else amount = 1500;
-
-		}
-
-
-		if (rand() % 10 != 0) {
+		if (rand() % 5 != 0) {
 			bank -= amount;
 		}
 

@@ -159,7 +159,7 @@ public:
 
 };
 
-//operators for comparison
+//operators for comparison of amount in bank account
 inline bool operator==(const player& lhs, const player& rhs);
 inline bool operator!=(const player& lhs, const player& rhs);
 inline bool operator<(const player& lhs, const player& rhs);
@@ -177,6 +177,8 @@ public:
 	playerUser();
 
 	playerUser(int playerNumber);
+
+	~playerUser();
 
 	//
 	//functions for game unknown

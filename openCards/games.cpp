@@ -389,12 +389,7 @@ void playGame(gameConfig * setup) {
 
 	
 
-	//give bonus money to players remaining
-	for (int ctr = 0; ctr < setup->numPlayers; ctr++) {
-		
-		setup->players[ctr]->addBonusMoney(100 * setup->initialNumPlayers / setup->numPlayers);
-
-	}
+	
 
 	//sort remaining players into order by money they have remaining (least money to most money)
 	int didSwap;
@@ -425,7 +420,7 @@ void playGame(gameConfig * setup) {
 	addBreak(3);
 	std::cout << "Placings:\n" << std::endl;
 	//remaining
-	for (int i = setup->numPlayers - 1; i > 0; i--) {
+	for (int i = setup->numPlayers - 1; i >= 0; i--) {
 		place++;
 		std::cout << place << ": " << setup->players[i]->getName() << "(Player " << setup->players[i]->getPlayerNum() << ")" << std::endl;
 
