@@ -175,6 +175,7 @@
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="gameConfig.gsf" />
     <None Include="playerInfo.gdf" />
     <None Include="stats.gdf" />
     <None Include="store.gdf" />

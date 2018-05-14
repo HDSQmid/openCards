@@ -12,7 +12,7 @@
 #define PLAYER_INFO_FILE "playerInfo.gdf"
 #define STORE_DATA_FILE "store.gdf"
 
-#define DEFAULT_GAME_TEMPLATE_FILE "setup.template"
+#define DEFAULT_GAME_TEMPLATE_FILE "gameConfig.gsf"
 
 #define LOG_FILE "log.txt"
 
@@ -64,7 +64,7 @@ public:
 	void load();
 
 	//function to create game setup from template file
-	gameConfig loadGameFromDisc();
+	gameConfig loadGameTemplate(std::string fileLoc);
 
 	//function for deleting game data
 	int rescue();

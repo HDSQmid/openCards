@@ -146,7 +146,7 @@ int checkInput(std::string input) {
 	//start game from template
 	if (input == "loadTemplate") {
 
-		playGame(&(data.loadGameFromDisc()));
+		playGame(&(data.loadGameTemplate()));
 		ret = 1;
 	}
 

@@ -374,14 +374,10 @@ void playGame(gameConfig * setup) {
 		}
 
 		std::cout << "starting game " << setup->gameNumber + 1 << ": ";
+		data.log("Starting game " + (setup->gameNumber + 1));
 		setup->gamesPtr[setup->gameNumber]->play(setup);
 
-		//eliminate players
-		
-		
-
-		
-		
+				
 
 
 
@@ -469,7 +465,9 @@ void gameConfig::eliminatePlayer(int playerNum) {
 //function setUpGame sets up and starts game
 gameConfig setupGame() {
 
-	std::cout << "setting up game\n";
+	data.log("Setting up games");
+
+	std::cout << "Setting up game\n";
 	gameConfig setup;
 	std::string in;
 	std::stringstream str;
@@ -486,7 +484,7 @@ gameConfig setupGame() {
 			break;
 
 		}
-		std::cout << "you can't play less than one game!" << std::endl;
+		std::cout << "You can't play less than one game!" << std::endl;
 
 	} while (1 == 1);
 
@@ -669,7 +667,13 @@ gameConfig setupGame() {
 
 
 
+	data.log("Game setup complete");
+	if (debuggingMode) {
 
+		data.log("Number of players: " + setup.numPlayers);
+		data.log("Number of games: " + setup.numGames);
+		
+	}
 
 
 	return setup;

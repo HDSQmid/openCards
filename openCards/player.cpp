@@ -15,16 +15,12 @@
 		inHand = 0;
 		name = "null";
 
+		bringMoney();
+		
+		data.log("Created player: " + name);
+
 	}
 
-	player::player(int playerNumber)
-	{
-		playerNum = playerNumber;
-		ID = -1;
-		numCards = 0;
-		inHand = 0;
-		name = "null";
-	}
 
 	//remove player from game
 	void player::eliminate(int place) {
@@ -407,17 +403,11 @@
 		name = usr.getName();
 		isUser = 1;
 
+		bringMoney();
+		data.log("Created player: " + name);
 	}
 
-	playerUser::playerUser(int playerNumber)
-	{
-		playerNum = playerNumber;
-		ID = -1;
-		numCards = 0;
-		inHand = 0;
-		name = usr.getName();
-
-	}
+	
 
 	playerUser::~playerUser()
 	{
@@ -656,16 +646,8 @@
 		inHand = 0;
 		name = "Mr. Gupps";
 
-	}
-
-	playerGupps::playerGupps(int playerNumber)
-	{
-		playerNum = playerNumber;
-		ID = -1;
-		numCards = 0;
-		inHand = 0;
-		name = "Mr Gupps";
-
+		bringMoney();
+		data.log("Created player: " + name);
 	}
 
 	//function to print cards in hand does nothing for bot
@@ -754,17 +736,10 @@
 		inHand = 0;
 		name = "Larry";
 
+		bringMoney();
+		data.log("Created player: " + name);
 	}
 
-	playerLarry::playerLarry(int playerNumber)
-	{
-		playerNum = playerNumber;
-		ID = -1;
-		numCards = 0;
-		inHand = 0;
-		name = "Larry";
-
-	}
 
 	//function to print cards in hand does nothing for bot
 	void playerLarry::printCards() const {
@@ -849,18 +824,10 @@
 		inHand = 0;
 		name = "Richard";
 
-
+		bringMoney();
+		data.log("Created player: " + name);
 	}
 
-	playerRichard::playerRichard(int playerNumber)
-	{
-		playerNum = playerNumber;
-		ID = -1;
-		numCards = 0;
-		inHand = 0;
-		name = "Richard";
-
-	}
 
 	//function to print cards in hand does nothing for bot
 	void playerRichard::printCards() const {
@@ -943,17 +910,10 @@
 		inHand = 0;
 		name = "Charlie";
 
+		bringMoney();
+		data.log("Created player: " + name);
 	}
 
-	playerCharlie::playerCharlie(int playerNumber)
-	{
-		playerNum = playerNumber;
-		ID = -1;
-		numCards = 0;
-		inHand = 0;
-		name = "Charlie";
-
-	}
 
 	//function to print cards in hand does nothing for bot
 	void playerCharlie::printCards() const {

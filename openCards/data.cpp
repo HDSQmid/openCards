@@ -286,202 +286,25 @@ void dataIO::load() {
 }
 
 //function to create game setup from template file
-gameConfig dataIO::loadGameFromDisc() {
+gameConfig dataIO::loadGameTemplate(std::string fileLoc = DEFAULT_GAME_TEMPLATE_FILE) {
 
 	//reads in data from file
-	input.open(DEFAULT_GAME_TEMPLATE_FILE, std::ios::in);
+	input.open(fileLoc, std::ios::in);
 	if (input.is_open()) {
 
-		int inputType = -1;
-
-		int numPlayers = 0;
-		int * playerIDs = NULL;
-
-		int numGames = 0;
-		int * gameIDs = NULL;
-
-		while (!input.eof()) {
-			std::string in;
-			int first;
-			int last;
-			std::getline(input, in);
-
-			//check if input type has changed
-			if (in == "player") {
-
-				inputType = 1;
-				continue;
-
-			}
-			if (in == "game") {
-
-				inputType = 2;
-				continue;
-
-			}
-
-			//get next input
-			std::stringstream str(in);
-			str >> first >> last;
-
-			if (inputType == 1) {
-
-				//reallocate list of players based on number of new players + current number of players
-				int * temp = new int[numPlayers + last];
-
-				if (playerIDs != NULL) {
-					//copy old list of players to new one
-					temp = playerIDs;
-				}
-				//determine id of new players
-
-				//add new players to list
-				for (int ctr = numPlayers; ctr < numPlayers + last; ctr++) {
-
-					temp[ctr] = first;
-
-				}
-
-				//assign new list to pointer
-				playerIDs = temp;
-				numPlayers += last;
-
-			}
-
-			if (inputType == 2) {
-
-				//reallocate list of games based on number of new games + current number of games
-				int * temp = new int[numGames + last];
-				if (gameIDs != NULL) {
-					//copy old list of games to new one
-					temp = gameIDs;
-				}
-				//determine id of new games
-
-				//add new games to list
-				for (int ctr = numGames; ctr < numGames + last; ctr++) {
-
-					temp[ctr] = first;
-
-				}
-
-				//assign new list to pointer
-				gameIDs = temp;
-				numGames += last;
-
-			}
-
-		}
+		data.log("Loading game from template");
+		//read file
+		//determine 
 
 		input.close();
-
-		gameConfig setup;
-		setup.numGames = numGames;
-		setup.gameType = gameIDs;
-		setup.numPlayers = numPlayers;
-		setup.initialNumPlayers = numPlayers;
-		setup.playerID = playerIDs;
-
-		game ** tempGames = new game*[setup.numGames];
-
-		//create games
-		for (int ctr = 0; ctr < setup.numGames; ctr++) {
-
-			std::string tempS;
-
-			switch (setup.gameType[ctr]) {
-
-			case 1: tempS = "Blackjack";
-				break;
-
-			case 2: tempS = "Unknown";
-				break;
-
-			default:
-				std::cout << "That game mode doesn't exist." << std::endl;
-				tempS = "not a game mode";
-
-			}
-			//if they don't own the game mode
-			if (!(shop.ownsBuy(tempS))) {
-
-				ctr--;
-				std::cout << "Enter a new game mode" << std::endl;
-				continue;
-
-			}
-			else {
-
-				switch (setup.gameType[ctr]) {
-
-					//blackjack
-				case 1: tempGames[ctr] = new blackjack;
-					break;
-
-					//unknown
-				case 2: tempGames[ctr] = new unknown;
-					break;
-
-				default:
-					std::cout << "That game mode doesn't exist." << std::endl;
-					tempS = "not a game mode";
-
-				}
-
-			}
-
-		}
-
-		setup.gamesPtr = tempGames;
-
-		//create players
-		player ** players = new  player*[setup.initialNumPlayers];
-		//create players and add to an array of player pointers
-		for (int ctr = 0; ctr < setup.numPlayers; ctr++) {
-
-			switch (setup.playerID[ctr]) {
-
-			case 0:
-				players[ctr] = new playerUser;
-				break;
-
-
-
-			case 2:
-				players[ctr] = new playerGupps;
-				break;
-
-			case 3:
-				players[ctr] = new playerLarry;
-				break;
-
-			case 4:
-				players[ctr] = new playerRichard;
-				break;
-
-			case 10:
-				players[ctr] = new playerCharlie;
-				break;
-
-			default:
-				std::cout << "Bad Value." << std::endl;
-
-			}
-
-
-
-		}
-
-		setup.players = players;
-
-		return setup;
-
-
 	}
-	//else is implied
-	std::cout << "Error reading file" << std::endl;
-	throw "FileError";
+	else throw std::exception("Error Reading File");
 
+
+	gameConfig setup;
+
+	//create game config
+	return setup;
 }
 
 //function for deleting game data

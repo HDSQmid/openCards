@@ -41,7 +41,7 @@
 
 			else {
 				//check for negitive numbers
-				if (amount <= 0) {
+				if (amount < 0) {
 
 					std::cout << "You can't bring nothing!" << std::endl;
 

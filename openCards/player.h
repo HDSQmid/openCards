@@ -8,6 +8,7 @@
 #include "deck.h"
 #include "User.h"
 #include "games.h"
+#include "data.h"
 
 
 class card;
