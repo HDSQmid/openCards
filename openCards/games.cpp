@@ -691,3 +691,8 @@ void startGame() {
 	return;
 
 }
+
+void poker::play(gameConfig * setup)
+{
+	std::cout << "Test" << std::endl;
+}

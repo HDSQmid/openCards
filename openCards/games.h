@@ -44,6 +44,17 @@ public:
 
  };
 
+ //poker game
+ class poker: public game {
+
+ public: 
+
+	 //function for playing poker
+	 void play(gameConfig * setup);
+
+
+ };
+
 
 //class gameConfig configurates game
 class gameConfig {
