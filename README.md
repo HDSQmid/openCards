@@ -1,8 +1,4 @@
-openCards
-an open source cards program
+# openCards
+An abandoned project from when I was bad at computer programming.
 
-using the GNU GPL V3.0 liscence
-
-IDK
-
-add stuff if you want
+This code will by far be the most tasteless spaghetti you have ever tried.
